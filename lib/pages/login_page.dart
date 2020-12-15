@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cat_test_app/pages/auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -19,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
         title: Text('Log In'),
         centerTitle: true,
       ),
-      body: Center(
+      body: !isFLogin ? Center(
         child: Container(
           padding: EdgeInsets.all(25.0),
           child: Column(
@@ -33,12 +30,24 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: ()  {
                   googleSignIn().whenComplete(() => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage())));
                 },
-                  )
+                  ),
+              RaisedButton(
+                child: Text('LogIn with Facebook'),
+                color: Colors.blue,
+                textColor: Colors.white,
+                elevation: 7.0,
+                onPressed: () async {
+                  await handleLogin();
+                },
+              )
                   ],
                   ),
                ),
 
-            ),
+            ) : Center(
+        //ToDo sign out
+      )
+
       );
 
   }
