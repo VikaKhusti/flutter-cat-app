@@ -44,7 +44,7 @@ Future handleLogin () async {
 
 Future facebookSignIn(FacebookLoginResult _result) async {
   FacebookAccessToken _accessToken = _result.accessToken;
-  AuthCredential _credential = FacebookAuthProvider.getCredential(accessToken: _accessToken.toString());
+  AuthCredential _credential = FacebookAuthProvider.getCredential(accessToken: _accessToken.token);
   var a = await _auth.signInWithCredential(_credential);
   isFLogin = true;
 }
@@ -57,20 +57,7 @@ Future<bool> signOutUser() async {
   await _auth.signOut();
   _facebookLogin.logOut();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  .3isFLogin = false;
+  isFLogin = false;
   return Future.value(true);
 
 }
